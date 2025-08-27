@@ -1,15 +1,21 @@
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 r = {"text":"is the data good or bed 1970-01-87 1960-02-89 gun arrow uivishui ujfbk 123588","clean_data":"gyudsgh syug sy 1970-01-87 1960-02-89 gxgjys guysg guysgf "}
 
 
 class Enricher:
-    def __init__(self,message:dict,path="blake_list/weapon_list.txt"):
+    def __init__(self,message:dict):
         self.message = message
         self.clean_data = message["clean_data"]
         self.dirty_data = message["text"]
-        with open(path)as file:
+        self.path = os.getenv("PATH_TO_WEAPONS_LIST")
+        with open(self.path)as file:
             self.weapons_list = file.read().split("\n")
 
     def is_positive_or_negative(self):
