@@ -1,8 +1,5 @@
-from read_from_DB import cech_data
 
 
-c = cech_data()
-p = c.connect_and_read()
 
 class Cat_data_by_antisemitic:
     def __init__(self,):

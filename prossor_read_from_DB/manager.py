@@ -22,7 +22,7 @@ class Manager:
 
         for index, message in antisemitic.iterrows():
             msg_anti = message.to_dict()
-            print(msg_anti)
+            print(type(msg_anti))
             self.produser.publish_message(self.topic_antisemitic,msg_anti)
         for index, message in not_antisemitic.iterrows():
             msg_not_anti = message.to_dict()
