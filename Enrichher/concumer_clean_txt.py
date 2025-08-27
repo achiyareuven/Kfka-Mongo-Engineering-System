@@ -5,9 +5,9 @@ import json
 
 load_dotenv()
 
-topic_antisemitic = os.getenv("TOPIC_CLEAN_ANTISEMITIC")
-topic_not_antisemitic = os.getenv("TOPIC_CLEAN_NOT_ANTISEMITIC")
-group = os.getenv("GROUP_NAME","interest_group")
+topic_clean_antisemitic = os.getenv("TOPIC_CLEAN_ANTISEMITIC")
+topic_clean_not_antisemitic = os.getenv("TOPIC_CLEAN_NOT_ANTISEMITIC")
+group_clean = os.getenv("GROUP_NAME","interest_group")
 
 class Consumer:
     def __init__(self,not_antisemitic,antisemitic,group):#group
@@ -28,7 +28,7 @@ class Consumer:
 
         return consumer
 
-p = Consumer(topic_not_antisemitic,topic_antisemitic,group)
+p = Consumer(topic_clean_not_antisemitic,topic_clean_antisemitic,group_clean)
 o = p.get_consumer_events()
 
 for msg in o:
