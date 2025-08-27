@@ -11,20 +11,21 @@ class Enricher:
 
     def is_positive_or_negative(self, tweet):
         nltk.download('vader_lexicon')
-        score = SentimentIntensityAnalyzer().polarity_scores(tweet)
+        score = SentimentIntensityAnalyzer().polarity_scores(tweet)["compound"]
         print(score)
-        # if score >= 0.5:
-        #     return "positive"
-        # if score < -0.5:
-        #     return "negative"
-        # else:
-        #     return "normal"
+        if score >= 0.5:
+            return "positive"
+        if score < -0.5:
+            return "negative"
+        else:
+            return "normal"
 
 
     def check_the_score(self):
-        self.data["score"] = self.data["Text"].apply(self.is_positive_or_negative)
+        new_data = self.is_positive_or_negative(self.data["Text"])
+        self.data["score"] = new_data
 
-
+    def check_if_their_is_weapons
 
 e = Enricher(r)
 print(e.check_the_score())
