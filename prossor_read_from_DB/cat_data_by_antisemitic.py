@@ -1,3 +1,5 @@
+from read_from_DB import cech_data
+
 
 
 
@@ -11,5 +13,3 @@ class Cat_data_by_antisemitic:
         self.antisemitic = self.data_table[self.data_table["Antisemitic"] == 1]
         self.not_antisemitic = self.data_table[self.data_table["Antisemitic"] == 0]
         return self.antisemitic ,self.not_antisemitic
-
-
