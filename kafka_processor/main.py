@@ -24,7 +24,9 @@ class Manager:
 
     def start_loop(self):
         for msg in self.consumer.get_consumer_events():
-            # print(type(msg.value),f"value={msg.value}")
+            print(type(msg.topic),msg.topic)
+            print(type(msg.value["text"]))
+            print(type(msg.value),f"value={msg.value}")
             processor = TextProcessor(msg.value["text"])
             cleaned_text = processor.process_all_and_get()
             msg.value["cleaned_text"] = cleaned_text
