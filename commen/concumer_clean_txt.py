@@ -7,7 +7,7 @@ load_dotenv()
 
 topic_clean_antisemitic = os.getenv("TOPIC_CLEAN_ANTISEMITIC")
 topic_clean_not_antisemitic = os.getenv("TOPIC_CLEAN_NOT_ANTISEMITIC")
-group_clean = os.getenv("GROUP_NAME","interest_group")
+group_clean = os.getenv("erest_up")
 
 class Consumer:
     def __init__(self,not_antisemitic,antisemitic,group):#group
@@ -32,4 +32,5 @@ p = Consumer(topic_clean_not_antisemitic,topic_clean_antisemitic,group_clean)
 o = p.get_consumer_events()
 
 for msg in o:
+    print(type(msg),msg)
     print(type(msg.value),f"value={msg.value}")
