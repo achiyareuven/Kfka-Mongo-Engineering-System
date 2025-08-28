@@ -5,6 +5,7 @@ import os
 from dotenv import load_dotenv
 
 
+
 load_dotenv()
 
 
@@ -22,12 +23,13 @@ class Manager_the_enricher:
 
     def enrich_the_data_and_send_to_kafka(self):
         for msg in self.consumer.get_consumer_events():
-            print(msg.value,msg)
+            # print(msg.value,msg)
             enricher = Enricher(msg.value)
             payload =enricher.start_all_function_on_every_data()
             print(payload)
 
             if msg.topic == self.topic_read_anti:
+
                 producer_topic = self.topic_send_anti
             elif msg.topic  == self.topic_read_not_anti:
                 producer_topic = self.topic_send_not_anti

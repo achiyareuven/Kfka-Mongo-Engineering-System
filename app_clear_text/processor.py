@@ -40,8 +40,6 @@ class TextProcessor:
         self.clean_text = self.clean_text.lower()
 
 
-
-
     def get_clean_text(self):
         return self.clean_text
 

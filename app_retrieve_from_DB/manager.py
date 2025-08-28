@@ -33,5 +33,5 @@ class Manager:
 
 manager = Manager()
 while True:
-    time.sleep(6)
+    time.sleep(60)
     manager.start_all_presses()

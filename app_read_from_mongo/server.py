@@ -19,7 +19,7 @@ def read_from_mongo():
         all_data = {}
         mongo_reader = Get_data(collection_name)
         all_data[collection_name] = list(mongo_reader.col.find({}, {"_id": 0}))
-        return {"ok": True,"ik": all_data}
+        return {"ok": True,"MONGO_NOT_ANTI": all_data}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -32,7 +32,7 @@ def read_from_mongo():
         all_data = {}
         mongo_reader = Get_data(collection_name)
         all_data[collection_name] = list(mongo_reader.col.find({}, {"_id": 0}))
-        return {"ok": True,"ik": all_data}
+        return {"ok": True,"MONGO_ANTI": all_data}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 

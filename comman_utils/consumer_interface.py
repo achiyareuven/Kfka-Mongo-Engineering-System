@@ -27,9 +27,9 @@ class Consumer:
         )
 
         return consumer
+#
+# p = Consumer(topic_clean_not_antisemitic,topic_clean_antisemitic,group_clean)
+# o = p.get_consumer_events()
 
-p = Consumer(topic_clean_not_antisemitic,topic_clean_antisemitic,group_clean)
-o = p.get_consumer_events()
-
-for msg in o:
-    print(type(msg.value),f"value={msg.value}")
+# for msg in o:
+#     print(type(msg.value),f"value={msg.value}")
