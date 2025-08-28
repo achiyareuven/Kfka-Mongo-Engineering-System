@@ -15,5 +15,5 @@ class MongoWriter:
         if isinstance(message,dict):
             doc = message
         else:
-            doc = {"value": message}
+            doc = {"value": message.value}
         return self.col.insert_one(doc)

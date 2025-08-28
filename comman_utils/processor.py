@@ -1,10 +1,11 @@
 import nltk
-nltk.data.path.append("./nltk_data")
+import os
+# nltk.data.path.append("./nltk_data")
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
 import re
-
+NLTK_DIR = os.path.join(os.path.dirname(__file__), "comman_utils")
 
 
 class TextProcessor:

@@ -1,10 +1,11 @@
 from kafka import KafkaConsumer
 from dotenv import load_dotenv
 from comman_utils.consumer_interface import Consumer
-from comman_utils.processor import TextProcessor
-import os
-import json
+from app_clear_text.processor import TextProcessor
 from comman_utils.producer_interface import Producer
+
+import os
+
 
 
 load_dotenv()

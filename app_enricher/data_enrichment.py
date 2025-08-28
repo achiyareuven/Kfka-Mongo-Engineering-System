@@ -7,6 +7,8 @@ import os
 from dotenv import load_dotenv
 from comman_utils.processor import TextProcessor
 
+nltk.data.path.append("./app_enricher/nltk_data")
+
 load_dotenv()
 
 
@@ -59,5 +61,6 @@ class Enricher:
         self.message["sentiment"] = self.is_positive_or_negative()
         self.message["detected_weapons"] = self.check_if_their_is_weapons()
         self.message["timestamp_relevant"] = self.find_the_latest_date()
+        return self.message
 
 

@@ -23,10 +23,14 @@ class Manager:
             try:
                 if msg.topic == self.topic_read1:
                     self.writer_anti.insert_event(msg)
+                    print("s")
                 elif msg.topic  == self.topic_read2:
                     self.writer_not_anti.insert_event(msg)
+                    print("a")
             except Exception as e:
                 print(f"faild to write to mongo{e}")
 
 
 
+a = Manager()
+a.start_loop()
