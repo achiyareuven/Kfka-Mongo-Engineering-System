@@ -30,8 +30,10 @@ class Manager:
             msg.value["cleaned_text"] = cleaned_text
             if msg.topic == self.topic_read1:
                 producer_topic = self.topic_send1
-            else:
+            elif msg.topic  == self.topic_read2:
                 producer_topic = self.topic_send2
+            else:
+                continue
             self.producer.publish_message(producer_topic,msg.value)
             print(msg.value)
             print(f"Message sent to topic {producer_topic}")
