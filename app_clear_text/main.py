@@ -1,10 +1,10 @@
 from kafka import KafkaConsumer
 from dotenv import load_dotenv
-from Enrichher.concumer_clean_txt import Consumer, topic_clean_antisemitic
+from comman_utils.consumer_interface import Consumer
+from comman_utils.processor import TextProcessor
 import os
 import json
-from kafka_processor.processor import TextProcessor
-from prossor_read_from_DB.producer_antisemitic_and_not import Producer
+from comman_utils.producer_interface import Producer
 
 
 load_dotenv()

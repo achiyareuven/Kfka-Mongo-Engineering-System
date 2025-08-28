@@ -1,6 +1,9 @@
-from Enrichher.concumer_clean_txt import Consumer
+from comman_utils.consumer_interface import Consumer
 from app_write_to_mongo.mongo_writer import MongoWriter
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 

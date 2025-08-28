@@ -1,5 +1,3 @@
-from read_from_DB import cech_data
-
 
 
 

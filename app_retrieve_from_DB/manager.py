@@ -1,5 +1,5 @@
 from cat_data_by_antisemitic import Cat_data_by_antisemitic
-from producer_antisemitic_and_not import Producer
+from comman_utils.producer_interface import Producer
 from read_from_DB import cech_data
 import os
 from dotenv import load_dotenv

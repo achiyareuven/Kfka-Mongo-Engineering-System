@@ -16,5 +16,3 @@ class Producer:
     def publish_message(self, topic, message):
         self.producer.send(topic, value=message)
         self.producer.flush()
-
-
