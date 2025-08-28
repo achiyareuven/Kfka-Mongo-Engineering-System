@@ -4,7 +4,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="feb35ec2-371b-40fd-84a6-b1a7f0ea388c" name="Changes" comment="yyyyyuuu" />
+    <list default="true" id="feb35ec2-371b-40fd-84a6-b1a7f0ea388c" name="Changes" comment="yyyyyuuu">
+      <change afterPath="$PROJECT_DIR$/.idea/Kfka-Mongo-Engineering-System.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker_enricher/Enrichher/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker_enricher/Enrichher/manager_the_enricher.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docker_enricher/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Enrichher/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/docker_enricher/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Enrichher/blake_list/weapon_list.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docker_enricher/Enrichher/blake_list/weapon_list.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Enrichher/check_is_positiv_or_negativ.py" beforeDir="false" afterPath="$PROJECT_DIR$/docker_enricher/Enrichher/check_is_positiv_or_negativ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Enrichher/manager_the_enricher.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/commen/concumer_clean_txt.py" beforeDir="false" afterPath="$PROJECT_DIR$/commen/concumer_clean_txt.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kafka_processor/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/kafka_processor/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prossor_read_from_DB/manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/prossor_read_from_DB/manager.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,16 +62,23 @@
     "Python.cat_data_by_antisemitic.executor": "Run",
     "Python.check_is_positiv_or_negativ.executor": "Run",
     "Python.concumer_clean_txt.executor": "Run",
+    "Python.main.executor": "Run",
     "Python.manager.executor": "Run",
+    "Python.manager_the_enricher.executor": "Run",
     "Python.read_from_DB.executor": "Run",
     "Python.try.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "read__from__db",
     "last_opened_file_path": "C:/Users/User/exe python/Kfka-Mongo-Engineering-System/Enrichher/check_is_positiv_or_negativ.py"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\exe python\Kfka-Mongo-Engineering-System\Enrichher\blake_list" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\User\exe python\Kfka-Mongo-Engineering-System\docker_enricher" />
     </key>
   </component>
   <component name="SharedIndexes">

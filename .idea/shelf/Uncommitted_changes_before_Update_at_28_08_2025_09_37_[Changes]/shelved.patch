@@ -1,0 +1,220 @@
+Index: Enrichher/manager_the_enricher.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Enrichher/manager_the_enricher.py b/docker_enricher/Enrichher/manager_the_enricher.py
+rename from Enrichher/manager_the_enricher.py
+rename to docker_enricher/Enrichher/manager_the_enricher.py
+--- a/Enrichher/manager_the_enricher.py	(revision 99f9b5e348bdd44a42df5d9831d54683fae3c544)
++++ b/docker_enricher/Enrichher/manager_the_enricher.py	(date 1756362958208)
+@@ -1,11 +1,22 @@
+ from commen.concumer_clean_txt import Consumer
+ from check_is_positiv_or_negativ import Enricher
+ from commen.producer_antisemitic_and_not import Producer
++import os
++from dotenv import load_dotenv
++
++
++load_dotenv()
++
++topic_antisemitic = os.getenv("TOPIC_CLEAN_ANTISEMITIC")
++topic_not_antisemitic = os.getenv("TOPIC_CLEAN_NOT_ANTISEMITIC")
++group = os.getenv("GROUP_NAME","interest_group")
++
+ 
+ class Manager_the_enricher:
+-    def __init__(self):
+-        self.consumer = Consumer()
+-        self.enricher = Enricher()
++    def __init__(self,topic_antisemitic,topic_not_antisemitic,group_id):
++        self.consumer = Consumer(topic_antisemitic,topic_not_antisemitic,group_id)
++        self.massage = self.consumer.get_consumer_events()
++        self.enricher = Enricher(self.massage)
+         self.producer = Producer()
+ 
+-    def
++    def enrich_the_data_and_send_to_kafka(self):
+Index: Enrichher/check_is_positiv_or_negativ.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Enrichher/check_is_positiv_or_negativ.py b/docker_enricher/Enrichher/check_is_positiv_or_negativ.py
+rename from Enrichher/check_is_positiv_or_negativ.py
+rename to docker_enricher/Enrichher/check_is_positiv_or_negativ.py
+--- a/Enrichher/check_is_positiv_or_negativ.py	(revision 99f9b5e348bdd44a42df5d9831d54683fae3c544)
++++ b/docker_enricher/Enrichher/check_is_positiv_or_negativ.py	(date 1756361688294)
+@@ -29,6 +29,7 @@
+         else:
+             return "normal"
+ 
++
+     def check_if_their_is_weapons(self):
+         list_of_weapons = []
+         for weapon in self.weapons_list:
+@@ -36,6 +37,7 @@
+                 list_of_weapons.append(weapon)
+         return list_of_weapons
+ 
++
+     def find_the_latest_date(self):
+         list_of_dates = []
+         for word in self.dirty_data.split(" "):
+@@ -48,6 +50,7 @@
+             return "their not datas"
+         return max(list_of_dates)
+ 
++
+     def start_all_function_on_every_data(self):
+         self.message["sentiment"] = self.is_positive_or_negative()
+         self.message["detected_weapons"] = self.check_if_their_is_weapons()
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/vcs.xml b/.idea/vcs.xml
+new file mode 100644
+--- /dev/null	(date 1756360516050)
++++ b/.idea/vcs.xml	(date 1756360516050)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/profiles_settings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/profiles_settings.xml b/.idea/inspectionProfiles/profiles_settings.xml
+new file mode 100644
+--- /dev/null	(date 1756360516023)
++++ b/.idea/inspectionProfiles/profiles_settings.xml	(date 1756360516023)
+@@ -0,0 +1,6 @@
++<component name="InspectionProjectProfileManager">
++  <settings>
++    <option name="USE_PROJECT_PROFILE" value="false" />
++    <version value="1.0" />
++  </settings>
++</component>
+\ No newline at end of file
+Index: .idea/inspectionProfiles/Project_Default.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/inspectionProfiles/Project_Default.xml b/.idea/inspectionProfiles/Project_Default.xml
+new file mode 100644
+--- /dev/null	(date 1756360515918)
++++ b/.idea/inspectionProfiles/Project_Default.xml	(date 1756360515918)
+@@ -0,0 +1,27 @@
++<component name="InspectionProjectProfileManager">
++  <profile version="1.0">
++    <option name="myName" value="Project Default" />
++    <inspection_tool class="PyPep8Inspection" enabled="true" level="INFORMATION" enabled_by_default="true">
++      <option name="ignoredErrors">
++        <list>
++          <option value="E231" />
++        </list>
++      </option>
++    </inspection_tool>
++    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
++      <option name="ignoredErrors">
++        <list>
++          <option value="N801" />
++          <option value="N802" />
++        </list>
++      </option>
++    </inspection_tool>
++    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
++      <option name="ignoredIdentifiers">
++        <list>
++          <option value="_random.random.*" />
++        </list>
++      </option>
++    </inspection_tool>
++  </profile>
++</component>
+\ No newline at end of file
+Index: .idea/Kfka-Mongo-Engineering-System.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/Kfka-Mongo-Engineering-System.iml b/.idea/Kfka-Mongo-Engineering-System.iml
+new file mode 100644
+--- /dev/null	(date 1756360515973)
++++ b/.idea/Kfka-Mongo-Engineering-System.iml	(date 1756360515973)
+@@ -0,0 +1,10 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module version="4">
++  <component name="PyDocumentationSettings">
++    <option name="format" value="PLAIN" />
++    <option name="myDocStringFormat" value="Plain" />
++  </component>
++  <component name="TestRunnerService">
++    <option name="PROJECT_TEST_RUNNER" value="py.test" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"feb35ec2-371b-40fd-84a6-b1a7f0ea388c\" name=\"Changes\" comment=\"yyyyyuuu\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Python Script\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"GitHubPullRequestSearchHistory\">{\r\n  &quot;lastFilter&quot;: {\r\n    &quot;state&quot;: &quot;OPEN&quot;,\r\n    &quot;assignee&quot;: &quot;bezalelshteren&quot;\r\n  }\r\n}</component>\r\n  <component name=\"GithubPullRequestsUISettings\">{\r\n  &quot;selectedUrlAndAccountId&quot;: {\r\n    &quot;url&quot;: &quot;https://github.com/achiyareuven/Kfka-Mongo-Engineering-System.git&quot;,\r\n    &quot;accountId&quot;: &quot;e9794cbb-b0aa-4be8-9b78-53ff00422df2&quot;\r\n  }\r\n}</component>\r\n  <component name=\"ProjectColorInfo\">{\r\n  &quot;associatedIndex&quot;: 4\r\n}</component>\r\n  <component name=\"ProjectId\" id=\"31rOMXKsnwrHXQxWdg6hSCbUrm7\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\"><![CDATA[{\r\n  \"keyToString\": {\r\n    \"Python.cat_data_by_antisemitic.executor\": \"Run\",\r\n    \"Python.check_is_positiv_or_negativ.executor\": \"Run\",\r\n    \"Python.concumer_clean_txt.executor\": \"Run\",\r\n    \"Python.manager.executor\": \"Run\",\r\n    \"Python.read_from_DB.executor\": \"Run\",\r\n    \"Python.try.executor\": \"Run\",\r\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\r\n    \"last_opened_file_path\": \"C:/Users/User/exe python/Kfka-Mongo-Engineering-System/Enrichher/check_is_positiv_or_negativ.py\"\r\n  }\r\n}]]></component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\User\\exe python\\Kfka-Mongo-Engineering-System\\Enrichher\\blake_list\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SharedIndexes\">\r\n    <attachedChunks>\r\n      <set>\r\n        <option value=\"bundled-python-sdk-884f5ed5d46b-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.22855.92\" />\r\n      </set>\r\n    </attachedChunks>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"feb35ec2-371b-40fd-84a6-b1a7f0ea388c\" name=\"Changes\" comment=\"\" />\r\n      <created>1756278678931</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1756278678931</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E-00001\" summary=\"yyyyy\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1756299438716</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\u200E\" />\r\n      <updated>1756299438716</updated>\r\n    </task>\r\n    <task id=\"LOCAL\u200E-00002\" summary=\"yyyyyuuu\">\r\n      <option name=\"closed\" value=\"true\" />\r\n      <created>1756313681470</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL\u200E-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\u200E\" />\r\n      <updated>1756313681470</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"yyyyy\" />\r\n    <MESSAGE value=\"yyyyyuuu\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"yyyyyuuu\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 99f9b5e348bdd44a42df5d9831d54683fae3c544)
++++ b/.idea/workspace.xml	(date 1756362958299)
+@@ -4,7 +4,18 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="feb35ec2-371b-40fd-84a6-b1a7f0ea388c" name="Changes" comment="yyyyyuuu" />
++    <list default="true" id="feb35ec2-371b-40fd-84a6-b1a7f0ea388c" name="Changes" comment="yyyyyuuu">
++      <change afterPath="$PROJECT_DIR$/.idea/Kfka-Mongo-Engineering-System.iml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/docker_enricher/__init__.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Enrichher/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/docker_enricher/Enrichher/__init__.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Enrichher/blake_list/weapon_list.txt" beforeDir="false" afterPath="$PROJECT_DIR$/docker_enricher/Enrichher/blake_list/weapon_list.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Enrichher/check_is_positiv_or_negativ.py" beforeDir="false" afterPath="$PROJECT_DIR$/docker_enricher/Enrichher/check_is_positiv_or_negativ.py" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Enrichher/manager_the_enricher.py" beforeDir="false" afterPath="$PROJECT_DIR$/docker_enricher/Enrichher/manager_the_enricher.py" afterDir="false" />
++    </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+@@ -49,12 +60,17 @@
+     "Python.read_from_DB.executor": "Run",
+     "Python.try.executor": "Run",
+     "RunOnceActivity.ShowReadmeOnStart": "true",
++    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
++    "git-widget-placeholder": "read__from__db",
+     "last_opened_file_path": "C:/Users/User/exe python/Kfka-Mongo-Engineering-System/Enrichher/check_is_positiv_or_negativ.py"
+   }
+ }]]></component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
+       <recent name="C:\Users\User\exe python\Kfka-Mongo-Engineering-System\Enrichher\blake_list" />
++    </key>
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="C:\Users\User\exe python\Kfka-Mongo-Engineering-System\docker_enricher" />
+     </key>
+   </component>
+   <component name="SharedIndexes">
+diff --git a/Enrichher/blake_list/weapon_list.txt b/docker_enricher/Enrichher/blake_list/weapon_list.txt
+rename from Enrichher/blake_list/weapon_list.txt
+rename to docker_enricher/Enrichher/blake_list/weapon_list.txt
+diff --git a/Enrichher/__init__.py b/docker_enricher/Enrichher/__init__.py
+rename from Enrichher/__init__.py
+rename to docker_enricher/Enrichher/__init__.py
+diff --git a/docker_enricher/__init__.py b/docker_enricher/__init__.py
+new file mode 100644
