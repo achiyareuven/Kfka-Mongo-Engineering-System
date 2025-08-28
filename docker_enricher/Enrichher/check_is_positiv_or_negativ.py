@@ -1,8 +1,11 @@
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+nltk.data.path.append("./docker_enricher/Enrichher/vader_lexicon/vader_lexicon.txt")
+nltk.data.path.append("./nltk_data")
 from datetime import datetime
 import os
 from dotenv import load_dotenv
+from kafka_processor.processor import TextProcessor
 
 load_dotenv()
 
@@ -14,7 +17,8 @@ class Enricher:
         self.dirty_data = message["text"]
         self.path = os.getenv("PATH_TO_WEAPONS_LIST")
         with open(self.path)as file:
-            self.weapons_list = file.read().split("\n")
+            self.weapons_string = file.read()
+        self.prossor = TextProcessor(self.weapons_string)
 
     def is_positive_or_negative(self):
         nltk.download('vader_lexicon')
@@ -29,8 +33,10 @@ class Enricher:
 
 
     def check_if_their_is_weapons(self):
+        weapons_clean = self.prossor.process_all_and_get()
+        print(weapons_clean)
         list_of_weapons = []
-        for weapon in self.weapons_list:
+        for weapon in weapons_clean:
             if weapon in self.clean_data:
                 list_of_weapons.append(weapon)
         return list_of_weapons
@@ -55,9 +61,7 @@ class Enricher:
         self.message["timestamp_relevant"] = self.find_the_latest_date()
 
 
-# e = Enricher(r)
-# e.start_all_function_on_every_data()
-# # print(e.is_positive_or_negative())
-# # print(e.find_the_latest_date())
-# # print(e.check_if_their_is_weapons())
-# print(e.message)
+
+# from nltk.tokenize import word_tokenize
+# nltk.download("punkt", download_dir="./nltk_data")
+# nltk.download("punkt_tab", download_dir="./nltk_data")
